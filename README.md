@@ -154,7 +154,50 @@ sites/form-builder     → live demo
 
 ## Publish to npm
 
-See [PUBLISHING.md](./PUBLISHING.md).
+First-time setup (token, scope, 2FA): see [PUBLISHING.md](./PUBLISHING.md).
+
+**Live packages:**
+
+| Package | npm |
+|---------|-----|
+| Core | https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui |
+| Ant Design | https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui-antd |
+| Charts | https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui-charts |
+
+**Repo:** https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui
+
+### Republish (after you change code or fix README links)
+
+npm does not update until you bump the version and publish again.
+
+**1. Bump version** in all three `package.json` files:
+
+- `packages/core/package.json`
+- `packages/antd/package.json`
+- `packages/charts/package.json`
+
+Change e.g. `1.0.1` → `1.0.2` (must be higher than the version already on npm).
+
+**2. Build and test:**
+
+```bash
+npx pnpm@9 install
+npx pnpm@9 prepublish:check
+```
+
+**3. Publish** (core first, then antd, then charts):
+
+```bash
+cd packages/core && npm publish --access public
+cd ../antd && npm publish --access public
+cd ../charts && npm publish --access public
+```
+
+If you use 2FA with an authenticator app, add `--otp=123456` to each command.
+
+If you use an npm token: `npm config set //registry.npmjs.org/:_authToken YOUR_TOKEN` (see [PUBLISHING.md](./PUBLISHING.md)).
+
+**4. Verify** — refresh the npm page and check the new version number.
 
 ---
 

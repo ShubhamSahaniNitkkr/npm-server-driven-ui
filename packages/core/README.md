@@ -13,4 +13,4 @@ import { createAntdRegistry } from '@shubhamsunnynitkkr/server-driven-ui-antd';
 <SDUIRenderer schema={schema} registry={createAntdRegistry()} />
 ```
 
-Full docs: [github.com/shubhamsunnynitkkr/npm-server-driven-ui](https://github.com/shubhamsunnynitkkr/npm-server-driven-ui)
+Full docs: [github.com/ShubhamSahaniNitkkr/npm-server-driven-ui](https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui)

@@ -108,6 +108,27 @@ Done. Check: https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui
 
 ---
 
+## Republish (update npm after code or README changes)
+
+npm keeps the old version until you publish a **new** version number.
+
+1. Bump `version` in `packages/core`, `packages/antd`, and `packages/charts` `package.json` (e.g. `1.0.1` → `1.0.2`)
+2. Run `npx pnpm@9 prepublish:check`
+3. Publish in order:
+
+```bash
+cd packages/core && npm publish --access public
+cd ../antd && npm publish --access public
+cd ../charts && npm publish --access public
+```
+
+4. Confirm on npm — version and README should update within a minute.
+
+**Repo URL on npm** must match your real GitHub repo:  
+https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui
+
+---
+
 ## Troubleshooting
 
 | Error | Fix |

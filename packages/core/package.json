@@ -1,6 +1,6 @@
 {
   "name": "@shubhamsunnynitkkr/server-driven-ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Lightweight TypeScript-first Server Driven UI engine for React",
   "author": "shubhamsunnynitkkr",
   "license": "MIT",
@@ -60,10 +60,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shubhamsunnynitkkr/npm-server-driven-ui.git"
+    "url": "git+https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/shubhamsunnynitkkr/npm-server-driven-ui/issues"
+    "url": "https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui/issues"
   },
-  "homepage": "https://github.com/shubhamsunnynitkkr/npm-server-driven-ui#readme"
+  "homepage": "https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui#readme"
 }
