@@ -1,19 +1,18 @@
-# Deploy all 5 sites on Render: Dashboard → New → Blueprint → connect this repo.
-# Default URLs: https://sdui-docs.onrender.com, https://sdui-user-management.onrender.com, etc.
+# Render Blueprint — Dashboard → New → Blueprint → connect repo → Apply
+# Docs: DEPLOY-RENDER.md
 
 services:
   - type: web
     name: sdui-docs
     runtime: static
-    buildCommand: echo "No build — static HTML"
+    buildCommand: echo "Static docs — no build"
     staticPublishPath: sites/docs
 
   - type: web
     name: sdui-user-management
     runtime: static
-    rootDir: sites/user-management
-    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-user-management run build
-    staticPublishPath: dist
+    buildCommand: bash scripts/render-build.sh sdui-site-user-management
+    staticPublishPath: sites/user-management/dist
     routes:
       - type: rewrite
         source: /*
@@ -22,9 +21,8 @@ services:
   - type: web
     name: sdui-crm-dashboard
     runtime: static
-    rootDir: sites/crm-dashboard
-    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-crm-dashboard run build
-    staticPublishPath: dist
+    buildCommand: bash scripts/render-build.sh sdui-site-crm-dashboard
+    staticPublishPath: sites/crm-dashboard/dist
     routes:
       - type: rewrite
         source: /*
@@ -33,9 +31,8 @@ services:
   - type: web
     name: sdui-analytics-dashboard
     runtime: static
-    rootDir: sites/analytics-dashboard
-    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-analytics-dashboard run build
-    staticPublishPath: dist
+    buildCommand: bash scripts/render-build.sh sdui-site-analytics-dashboard
+    staticPublishPath: sites/analytics-dashboard/dist
     routes:
       - type: rewrite
         source: /*
@@ -44,9 +41,8 @@ services:
   - type: web
     name: sdui-form-builder
     runtime: static
-    rootDir: sites/form-builder
-    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-form-builder run build
-    staticPublishPath: dist
+    buildCommand: bash scripts/render-build.sh sdui-site-form-builder
+    staticPublishPath: sites/form-builder/dist
     routes:
       - type: rewrite
         source: /*

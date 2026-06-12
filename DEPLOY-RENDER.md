@@ -24,6 +24,10 @@ git push origin main
 4. Render reads `render.yaml` and creates **5 static sites**  
 5. Click **Apply** → wait ~5–10 min for builds  
 
+> **Build failed?** Push the latest `render.yaml` + `scripts/render-build.sh`.  
+> In Render → failed service → **Logs** to see the error.  
+> Manual build command (repo root): `bash scripts/render-build.sh sdui-site-user-management`
+
 ### Default URLs (after deploy)
 
 | Site | URL |
