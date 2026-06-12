@@ -105,19 +105,26 @@ Open **http://localhost:5173**
 
 ---
 
-## Host on Render (separate sites)
+## Deploy websites to Render + link on npm
 
-| Site | Folder | Render publish path |
-|------|--------|---------------------|
-| Docs | `sites/docs` | `sites/docs` (no build) |
-| User Management | `sites/user-management` | `sites/user-management/dist` |
-| CRM Dashboard | `sites/crm-dashboard` | `sites/crm-dashboard/dist` |
-| Analytics | `sites/analytics-dashboard` | `sites/analytics-dashboard/dist` |
-| Form Builder | `sites/form-builder` | `sites/form-builder/dist` |
+**Full guide:** [DEPLOY-RENDER.md](./DEPLOY-RENDER.md)
 
-Full steps: [sites/README.md](./sites/README.md). Root [render.yaml](./render.yaml) deploys all 5 at once.
+**Quick steps:**
 
-After deploying demos, update URLs in `sites/docs/demos.json`.
+1. Push repo to GitHub  
+2. Render → **New** → **Blueprint** → connect repo → **Apply**  
+3. Wait for deploy — docs live at **https://sdui-docs.onrender.com**  
+4. Republish npm (version `1.0.2+`) so **Homepage** on npm points to docs  
+
+| Site | Live URL |
+|------|----------|
+| Docs (npm Homepage) | https://sdui-docs.onrender.com |
+| User Management | https://sdui-user-management.onrender.com |
+| CRM Dashboard | https://sdui-crm-dashboard.onrender.com |
+| Analytics | https://sdui-analytics-dashboard.onrender.com |
+| Form Builder | https://sdui-form-builder.onrender.com |
+
+Config: [render.yaml](./render.yaml) · URLs: [sites/urls.json](./sites/urls.json) · Demo links: [sites/docs/demos.json](./sites/docs/demos.json)
 
 ---
 
@@ -176,7 +183,7 @@ npm does not update until you bump the version and publish again.
 - `packages/antd/package.json`
 - `packages/charts/package.json`
 
-Change e.g. `1.0.1` → `1.0.2` (must be higher than the version already on npm).
+Change e.g. `1.0.2` → `1.0.3` (must be higher than the version already on npm).
 
 **2. Build and test:**
 

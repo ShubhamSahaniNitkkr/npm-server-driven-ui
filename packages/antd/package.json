@@ -1,6 +1,6 @@
 {
   "name": "@shubhamsunnynitkkr/server-driven-ui-antd",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ant Design components for @shubhamsunnynitkkr/server-driven-ui",
   "author": "shubhamsunnynitkkr",
   "license": "MIT",
@@ -60,5 +60,6 @@
     "type": "git",
     "url": "git+https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui.git",
     "directory": "packages/antd"
-  }
+  },
+  "homepage": "https://sdui-docs.onrender.com"
 }

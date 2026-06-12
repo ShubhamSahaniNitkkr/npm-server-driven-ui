@@ -1,47 +1,22 @@
-# Sites (deploy separately on Render)
+# Sites (Render deployment)
 
-Each folder is an **independent static site** for Render.
+See **[DEPLOY-RENDER.md](../DEPLOY-RENDER.md)** for the full deploy + npm linking guide.
 
-| Folder | Render service name | Publish path |
-|--------|---------------------|--------------|
-| `sites/docs` | sdui-docs | `sites/docs` (no build) |
-| `sites/user-management` | sdui-user-management | `sites/user-management/dist` |
-| `sites/crm-dashboard` | sdui-crm-dashboard | `sites/crm-dashboard/dist` |
-| `sites/analytics-dashboard` | sdui-analytics-dashboard | `sites/analytics-dashboard/dist` |
-| `sites/form-builder` | sdui-form-builder | `sites/form-builder/dist` |
+## URLs (after Render deploy)
 
-## Deploy on Render
+| Site | URL |
+|------|-----|
+| Docs | https://sdui-docs.onrender.com |
+| User Management | https://sdui-user-management.onrender.com |
+| CRM | https://sdui-crm-dashboard.onrender.com |
+| Analytics | https://sdui-analytics-dashboard.onrender.com |
+| Form Builder | https://sdui-form-builder.onrender.com |
 
-### 1. Docs site (no build)
-
-- **Type:** Static Site
-- **Root directory:** (repo root)
-- **Publish directory:** `sites/docs`
-- **Build command:** (leave empty)
-
-### 2. Demo sites (need build)
-
-Create one Static Site per demo. Example for User Management:
-
-- **Root directory:** (repo root)
-- **Build command:**
-  ```bash
-  pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-user-management run build
-  ```
-- **Publish directory:** `sites/user-management/dist`
-
-Or use the `render.yaml` inside each site folder.
-
-### 3. Link demos on docs site
-
-After deploying, update URLs in `sites/docs/demos.json` and redeploy docs.
+Update `sites/urls.json` and `sites/docs/demos.json` if your Render URLs differ.
 
 ## Local dev
 
 ```bash
-pnpm demo:user-management   # http://localhost:5173
-pnpm demo:crm
-pnpm demo:analytics
-pnpm demo:form-builder
-pnpm docs:serve             # http://localhost:3000
+npx pnpm@9 demo:user-management   # http://localhost:5173
+npx pnpm@9 docs:serve             # http://localhost:3000
 ```

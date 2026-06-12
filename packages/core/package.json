@@ -1,6 +1,6 @@
 {
   "name": "@shubhamsunnynitkkr/server-driven-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lightweight TypeScript-first Server Driven UI engine for React",
   "author": "shubhamsunnynitkkr",
   "license": "MIT",
@@ -65,5 +65,5 @@
   "bugs": {
     "url": "https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui/issues"
   },
-  "homepage": "https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui#readme"
+  "homepage": "https://sdui-docs.onrender.com"
 }

@@ -1,6 +1,6 @@
 {
   "name": "@shubhamsunnynitkkr/server-driven-ui-charts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Chart components for @shubhamsunnynitkkr/server-driven-ui",
   "author": "shubhamsunnynitkkr",
   "license": "MIT",
@@ -58,5 +58,6 @@
     "type": "git",
     "url": "git+https://github.com/ShubhamSahaniNitkkr/npm-server-driven-ui.git",
     "directory": "packages/charts"
-  }
+  },
+  "homepage": "https://sdui-docs.onrender.com"
 }

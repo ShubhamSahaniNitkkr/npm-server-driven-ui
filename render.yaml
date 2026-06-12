@@ -1,15 +1,18 @@
-# Deploy each service separately on Render, or use this blueprint for all at once.
+# Deploy all 5 sites on Render: Dashboard → New → Blueprint → connect this repo.
+# Default URLs: https://sdui-docs.onrender.com, https://sdui-user-management.onrender.com, etc.
+
 services:
   - type: web
     name: sdui-docs
     runtime: static
+    buildCommand: echo "No build — static HTML"
     staticPublishPath: sites/docs
 
   - type: web
     name: sdui-user-management
     runtime: static
     rootDir: sites/user-management
-    buildCommand: cd ../.. && pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-user-management run build
+    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-user-management run build
     staticPublishPath: dist
     routes:
       - type: rewrite
@@ -20,7 +23,7 @@ services:
     name: sdui-crm-dashboard
     runtime: static
     rootDir: sites/crm-dashboard
-    buildCommand: cd ../.. && pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-crm-dashboard run build
+    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-crm-dashboard run build
     staticPublishPath: dist
     routes:
       - type: rewrite
@@ -31,7 +34,7 @@ services:
     name: sdui-analytics-dashboard
     runtime: static
     rootDir: sites/analytics-dashboard
-    buildCommand: cd ../.. && pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-analytics-dashboard run build
+    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-analytics-dashboard run build
     staticPublishPath: dist
     routes:
       - type: rewrite
@@ -42,7 +45,7 @@ services:
     name: sdui-form-builder
     runtime: static
     rootDir: sites/form-builder
-    buildCommand: cd ../.. && pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-form-builder run build
+    buildCommand: cd ../.. && npx pnpm@9 install && npx pnpm@9 --filter "./packages/*" run build && npx pnpm@9 --filter sdui-site-form-builder run build
     staticPublishPath: dist
     routes:
       - type: rewrite
