@@ -1,101 +1,122 @@
-# Publishing to npm
+# Publish to npm (simplest way)
 
-## Packages
+npm has **no publish button on the website**. You publish from the terminal only.  
+This takes ~10 minutes once. After that, each release is 3 commands.
 
-| Package | npm name |
-|---------|----------|
-| Core | `@shubhamsunnynitkkr/server-driven-ui` |
-| Ant Design UI | `@shubhamsunnynitkkr/server-driven-ui-antd` |
-| Charts | `@shubhamsunnynitkkr/server-driven-ui-charts` |
+---
 
-## Before you publish
+## One-time setup (do once)
 
-1. Create an npm account: https://www.npmjs.com/signup
-2. Create the `@shubhamsunnynitkkr` scope: https://www.npmjs.com/org/create
-3. **Enable 2FA** (required — without this publish fails with E403)
-4. Run checks:
+### 1. Create the scope on npm
+
+1. Open https://www.npmjs.com/org/create  
+2. Organization name: `shubhamsunnynitkkr`  
+3. Choose **Free** plan  
+
+Without this, `@shubhamsunnynitkkr/...` packages cannot be published.
+
+### 2. Set up publish access (pick ONE option)
+
+Email OTP at login is **not enough** to publish. Pick **A** or **B**:
+
+#### Option A — No authenticator app? Use an npm token (easiest)
+
+Do everything in the **browser** (email OTP only — no Google Authenticator):
+
+1. Open https://www.npmjs.com/settings/~/tokens  
+2. Click **Generate New Token** → **Granular Access Token**  
+3. Name: `publish`  
+4. Expiration: 90 days (or longer)  
+5. Permissions: **Read and write**  
+6. Packages: select **All packages** (or only `@shubhamsunnynitkkr/*`)  
+7. If you see **Bypass two-factor authentication for automation** → turn it **ON**  
+8. Click **Generate Token** → **copy the token** (you only see it once)
+
+**Skip `npm login`** — paste the token directly (no browser):
 
 ```bash
+npm config set //registry.npmjs.org/:_authToken YOUR_TOKEN_HERE
+```
+
+Replace `YOUR_TOKEN_HERE` with the token you copied.  
+Check it worked: `npm whoami` (should print your username).
+
+Skip to [Publish](#publish-every-release) — you usually **don't** need `--otp=`.
+
+<details>
+<summary>Alternative: legacy login in terminal (no browser)</summary>
+
+```bash
+npm logout
+npm login --auth-type=legacy
+# Username: your npm username
+# Password: paste the TOKEN (not your npm password)
+# Email: your npm email
+```
+</details>
+
+#### Option B — Use Google Authenticator (2 min install)
+
+1. Install **Google Authenticator** from App Store / Play Store (free)  
+2. Open https://www.npmjs.com/settings/~/security  
+3. **Enable 2FA** → choose **Authorization and writes**  
+4. Scan QR code with the app  
+
+Log in (browser opens — press ENTER, complete login once):
+
+```bash
+npm logout
+npm login
+```
+
+Or avoid browser: `npm login --auth-type=legacy`  
+When publishing, use `--otp=123456` from the app.
+
+---
+
+## Publish (every release)
+
+### Step 1 — Build
+
+```bash
+cd /Users/shubhamsunny/Documents/Projects/npm-server-driven-ui
 npx pnpm@9 install
 npx pnpm@9 prepublish:check
 ```
 
----
+### Step 2 — Publish all 3 packages
 
-## Fix E403: "Two-factor authentication required"
-
-npm **blocks all publishes** without 2FA. Do this once:
-
-### Step 1 — Enable 2FA on npm
-
-1. Open https://www.npmjs.com/settings/~/security
-2. Click **Enable 2FA**
-3. Choose **Authorization and writes** (not "authorization only")
-4. Scan QR code with Google Authenticator / Authy
-5. Save your recovery codes
-
-### Step 2 — Log in again in terminal
+**If you used Option A (token):**
 
 ```bash
-npm logout
-npm login
+cd packages/core && npm publish --access public
+cd ../antd && npm publish --access public
+cd ../charts && npm publish --access public
 ```
 
-Enter username, password, email, then the **6-digit OTP** from your authenticator app.
+**If you used Option B (authenticator app):**
 
-### Step 3 — Publish with OTP
-
-When you publish, npm asks for OTP again. Either:
-
-**Option A** — wait for prompt:
 ```bash
-cd packages/core
-npm publish --access public
-# Enter OTP when prompted
+cd packages/core && npm publish --access public --otp=123456
+cd ../antd && npm publish --access public --otp=123456
+cd ../charts && npm publish --access public --otp=123456
 ```
 
-**Option B** — pass OTP directly:
-```bash
-npm publish --access public --otp=123456
-```
-Replace `123456` with the current code from your authenticator app.
+Replace `123456` with the code from Google Authenticator.
+
+Done. Check: https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui
 
 ---
 
-## Publish order (core first)
+## Troubleshooting
 
-```bash
-npx pnpm@9 build
-npx pnpm@9 test:coverage
-
-cd packages/core && npm publish --access public --otp=YOUR_CODE
-cd ../antd && npm publish --access public --otp=YOUR_CODE
-cd ../charts && npm publish --access public --otp=YOUR_CODE
-```
-
-Bump `version` in each `package.json` before each release.
-
----
-
-## Alternative: Granular access token
-
-If `npm login` keeps failing:
-
-1. Go to https://www.npmjs.com/settings/~/tokens
-2. **Generate New Token** → **Granular Access Token**
-3. Permissions: **Read and write** on packages
-4. Enable **Bypass 2FA for automation** (if available)
-5. Log in using the token as password:
-
-```bash
-npm logout
-npm login
-# Username: your-npm-username
-# Password: paste the token (not your npm password)
-# Email: your email
-```
-
-Then publish as above.
+| Error | Fix |
+|-------|-----|
+| `E403` + "Two-factor authentication required" | Enable 2FA → **Authorization and writes** → use `--otp=` |
+| `E402` / paywall | Use free org at npm.com/org/create |
+| `403 Forbidden` on scope | Create org `shubhamsunnynitkkr` first |
+| `You cannot publish over the previously published version` | Bump `version` in that package's `package.json` (e.g. `1.0.1`) |
+| OTP invalid | Code expires every 30s — get a new one |
 
 ---
 
@@ -106,11 +127,3 @@ Users install with:
 ```bash
 npm install @shubhamsunnynitkkr/server-driven-ui @shubhamsunnynitkkr/server-driven-ui-antd react react-dom antd
 ```
-
-With charts:
-
-```bash
-npm install @shubhamsunnynitkkr/server-driven-ui-charts recharts
-```
-
-Verify live package: https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui
