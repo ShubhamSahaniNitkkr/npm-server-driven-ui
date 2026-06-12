@@ -1,0 +1,61 @@
+{
+  "type": "page",
+  "title": "CRM Dashboard",
+  "children": [
+    {
+      "type": "grid",
+      "columns": 4,
+      "children": [
+        { "type": "card", "children": [{ "type": "statistic", "title": "Total Deals", "value": 128 }] },
+        { "type": "card", "children": [{ "type": "statistic", "title": "Revenue", "value": "$1.2M", "suffix": "USD" }] },
+        { "type": "card", "children": [{ "type": "statistic", "title": "Conversion", "value": "24%", "suffix": "" }] },
+        { "type": "card", "children": [{ "type": "statistic", "title": "Active Leads", "value": 342 }] }
+      ]
+    },
+    {
+      "type": "row",
+      "children": [
+        {
+          "type": "column",
+          "span": 16,
+          "children": [
+            {
+              "type": "card",
+              "title": "Recent Deals",
+              "children": [
+                {
+                  "type": "table",
+                  "dataSource": "{{deals}}",
+                  "rowKey": "id",
+                  "columns": [
+                    { "key": "company", "title": "Company", "sortable": true },
+                    { "key": "value", "title": "Value" },
+                    { "key": "stage", "title": "Stage" }
+                  ],
+                  "pagination": { "pageSize": 5 }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "column",
+          "span": 8,
+          "children": [
+            {
+              "type": "card",
+              "title": "Activity",
+              "children": [
+                {
+                  "type": "list",
+                  "dataSource": "{{activities}}",
+                  "itemRender": { "type": "text", "text": "{{item.title}}" }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "type": "page",
+  "title": "Analytics Dashboard",
+  "children": [
+    {
+      "type": "row",
+      "children": [
+        {
+          "type": "column",
+          "span": 8,
+          "children": [
+            { "type": "datepicker", "name": "startDate", "label": "Start Date" },
+            { "type": "datepicker", "name": "endDate", "label": "End Date" }
+          ]
+        },
+        {
+          "type": "column",
+          "span": 8,
+          "children": [
+            {
+              "type": "select",
+              "name": "metric",
+              "label": "Metric",
+              "options": [
+                { "label": "Revenue", "value": "revenue" },
+                { "label": "Users", "value": "users" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "grid",
+      "columns": 2,
+      "children": [
+        {
+          "type": "card",
+          "title": "Revenue Trend",
+          "children": [
+            {
+              "type": "lineChart",
+              "dataSource": "{{monthlyRevenue}}",
+              "xKey": "month",
+              "series": [{ "key": "revenue", "label": "Revenue", "color": "#1677ff" }],
+              "height": 280,
+              "legend": true
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "title": "Traffic Sources",
+          "children": [
+            {
+              "type": "pieChart",
+              "dataSource": "{{trafficSources}}",
+              "nameKey": "source",
+              "valueKey": "value",
+              "height": 280,
+              "legend": true
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "title": "Monthly Users",
+          "children": [
+            {
+              "type": "barChart",
+              "dataSource": "{{monthlyUsers}}",
+              "xKey": "month",
+              "series": [{ "key": "users", "label": "Users", "color": "#52c41a" }],
+              "height": 280
+            }
+          ]
+        },
+        {
+          "type": "card",
+          "title": "Growth Area",
+          "children": [
+            {
+              "type": "areaChart",
+              "dataSource": "{{growth}}",
+              "xKey": "month",
+              "series": [{ "key": "growth", "label": "Growth %", "color": "#722ed1" }],
+              "height": 280
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

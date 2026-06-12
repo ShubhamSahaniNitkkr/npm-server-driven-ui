@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@shubhamsunnynitkkr/server-driven-ui</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">@shubhamsunnynitkkr/server-driven-ui</a>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="configure.html">Configure</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Build UIs from JSON</h1>
+      <p>
+        Your backend sends a JSON schema. This library renders a full React page —
+        forms, tables, modals, charts — with zero hand-written UI code.
+      </p>
+      <div class="badges">
+        <span class="badge">React 18+</span>
+        <span class="badge">TypeScript</span>
+        <span class="badge">Ant Design</span>
+        <span class="badge">30+ components</span>
+      </div>
+      <div class="cta-row">
+        <a href="configure.html" class="btn btn-primary">How to Configure</a>
+        <a href="https://www.npmjs.com/package/@shubhamsunnynitkkr/server-driven-ui" class="btn btn-secondary" target="_blank" rel="noopener">npm package</a>
+      </div>
+    </div>
+
+    <section>
+      <h2>What the npm package does</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Core engine</h3>
+          <p><code>@shubhamsunnynitkkr/server-driven-ui</code> reads your JSON schema and renders a React component tree.</p>
+        </div>
+        <div class="card">
+          <h3>UI components</h3>
+          <p><code>@shubhamsunnynitkkr/server-driven-ui-antd</code> provides 30+ ready-made components: inputs, tables, buttons, modals.</p>
+        </div>
+        <div class="card">
+          <h3>Charts (optional)</h3>
+          <p><code>@shubhamsunnynitkkr/server-driven-ui-charts</code> adds line, bar, pie, and area charts.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>How it works</h2>
+      <div class="flow">
+        <div class="flow-step">Backend API<br><small>sends JSON</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">SDUIRenderer<br><small>reads schema</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">React UI<br><small>in browser</small></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Install</h2>
+      <pre><code>npm install @shubhamsunnynitkkr/server-driven-ui @shubhamsunnynitkkr/server-driven-ui-antd react react-dom antd</code></pre>
+      <pre><code>import { SDUIRenderer } from '@shubhamsunnynitkkr/server-driven-ui';
+import { createAntdRegistry } from '@shubhamsunnynitkkr/server-driven-ui-antd';
+
+&lt;SDUIRenderer schema={schemaFromApi} registry={createAntdRegistry()} /&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>Live examples</h2>
+      <p>Each example is a separate site — deploy independently on Render. Update URLs in <code>sites/docs/demos.json</code> after deploying.</p>
+      <table id="demos-table">
+        <thead>
+          <tr><th>Example</th><th>Shows</th><th>Link</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>User Management</td>
+            <td>Table, search, modal, conditional fields</td>
+            <td><a id="link-user-management" href="#">Open demo</a></td>
+          </tr>
+          <tr>
+            <td>CRM Dashboard</td>
+            <td>Stats cards, deals table, activity list</td>
+            <td><a id="link-crm-dashboard" href="#">Open demo</a></td>
+          </tr>
+          <tr>
+            <td>Analytics Dashboard</td>
+            <td>Date filters, line/bar/pie/area charts</td>
+            <td><a id="link-analytics-dashboard" href="#">Open demo</a></td>
+          </tr>
+          <tr>
+            <td>Form Builder</td>
+            <td>Dynamic form fields, preview panel</td>
+            <td><a id="link-form-builder" href="#">Open demo</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer>MIT © shubhamsunnynitkkr</footer>
+
+  <script>
+    fetch('demos.json')
+      .then((r) => r.json())
+      .then((d) => {
+        const links = {
+          'link-user-management': d.userManagement,
+          'link-crm-dashboard': d.crmDashboard,
+          'link-analytics-dashboard': d.analyticsDashboard,
+          'link-form-builder': d.formBuilder,
+        };
+        for (const [id, url] of Object.entries(links)) {
+          const el = document.getElementById(id);
+          if (el && url) el.href = url;
+        }
+      })
+      .catch(() => {});
+  </script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+services:
+  - type: web
+    name: sdui-docs
+    runtime: static
+    staticPublishPath: sites/docs

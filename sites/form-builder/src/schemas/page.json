@@ -1,0 +1,65 @@
+{
+  "type": "page",
+  "title": "Dynamic Form Builder",
+  "children": [
+    {
+      "type": "row",
+      "children": [
+        {
+          "type": "column",
+          "span": 12,
+          "children": [
+            {
+              "type": "card",
+              "title": "Build Form",
+              "children": [
+                {
+                  "type": "select",
+                  "name": "fieldType",
+                  "label": "Field Type",
+                  "options": [
+                    { "label": "Text Input", "value": "input" },
+                    { "label": "Email", "value": "input" },
+                    { "label": "Number", "value": "number" },
+                    { "label": "Checkbox", "value": "checkbox" },
+                    { "label": "Select", "value": "select" }
+                  ]
+                },
+                { "type": "input", "name": "fieldName", "label": "Field Name", "required": true },
+                { "type": "input", "name": "fieldLabel", "label": "Label" },
+                {
+                  "type": "switch",
+                  "name": "required",
+                  "label": "Required"
+                },
+                {
+                  "type": "button",
+                  "text": "Add Field",
+                  "variant": "primary",
+                  "actions": {
+                    "onClick": { "type": "customAction", "name": "addField" }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "column",
+          "span": 12,
+          "children": [
+            {
+              "type": "card",
+              "title": "Preview",
+              "children": [
+                { "type": "alert", "message": "Form preview renders from generated schema", "variant": "info" },
+                { "type": "divider", "text": "Generated Fields" },
+                { "type": "empty", "description": "Add fields to see preview" }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

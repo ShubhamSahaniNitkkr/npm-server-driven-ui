@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: sdui-form-builder
+    runtime: static
+    rootDir: sites/form-builder
+    buildCommand: cd ../.. && pnpm install && pnpm --filter "./packages/*" run build && pnpm --filter sdui-site-form-builder run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

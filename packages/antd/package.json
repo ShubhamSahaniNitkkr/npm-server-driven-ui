@@ -1,0 +1,64 @@
+{
+  "name": "@shubhamsunnynitkkr/server-driven-ui-antd",
+  "version": "1.0.0",
+  "description": "Ant Design components for @shubhamsunnynitkkr/server-driven-ui",
+  "author": "shubhamsunnynitkkr",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "vite build && tsc --emitDeclarationOnly -p tsconfig.build.json",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@shubhamsunnynitkkr/server-driven-ui": "^1.0.0",
+    "antd": ">=5.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@shubhamsunnynitkkr/server-driven-ui": "workspace:*",
+    "@testing-library/react": "^16.2.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "antd": "^5.23.2",
+    "jsdom": "^26.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.7.3",
+    "vite": "^6.0.11",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "server-driven-ui",
+    "antd",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shubhamsunnynitkkr/npm-server-driven-ui.git",
+    "directory": "packages/antd"
+  }
+}

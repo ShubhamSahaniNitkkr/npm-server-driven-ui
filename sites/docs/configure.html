@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Configure — @shubhamsunnynitkkr/server-driven-ui</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">@shubhamsunnynitkkr/server-driven-ui</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="configure.html" class="active">Configure</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="hero" style="padding-top: 1rem;">
+      <h1>Configuration Guide</h1>
+      <p>Everything is JSON. Each UI element has a <code>type</code> and optional props.</p>
+    </div>
+
+    <section>
+      <h2>Basic page structure</h2>
+      <pre><code>{
+  "type": "page",
+  "title": "User Management",
+  "children": [
+    { "type": "input", "name": "search", "label": "Search" },
+    { "type": "button", "text": "Save", "variant": "primary" }
+  ]
+}</code></pre>
+      <pre><code>import { ConfigProvider } from 'antd';
+import { SDUIRenderer } from '@shubhamsunnynitkkr/server-driven-ui';
+import { createAntdRegistry } from '@shubhamsunnynitkkr/server-driven-ui-antd';
+
+&lt;ConfigProvider&gt;
+  &lt;SDUIRenderer
+    schema={schema}
+    registry={createAntdRegistry()}
+    context={{ users: myUsers }}
+    onSubmit={(data) =&gt; console.log(data)}
+  /&gt;
+&lt;/ConfigProvider&gt;</code></pre>
+    </section>
+
+    <section>
+      <h2>SDUIRenderer props</h2>
+      <table>
+        <thead>
+          <tr><th>Prop</th><th>Required</th><th>What it does</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>schema</code></td><td>Yes</td><td>JSON describing the page UI</td></tr>
+          <tr><td><code>registry</code></td><td>Yes</td><td>Component map — use <code>createAntdRegistry()</code></td></tr>
+          <tr><td><code>context</code></td><td>No</td><td>Data for templates like <code>{{users}}</code></td></tr>
+          <tr><td><code>onSubmit</code></td><td>No</td><td>Called when a submit action fires</td></tr>
+          <tr><td><code>onNavigate</code></td><td>No</td><td>Called on navigate actions</td></tr>
+          <tr><td><code>theme</code></td><td>No</td><td><code>"light"</code>, <code>"dark"</code>, or custom theme object</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Component types</h2>
+      <table>
+        <thead>
+          <tr><th>Category</th><th>Types</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Forms</td><td><code>input</code>, <code>textarea</code>, <code>select</code>, <code>checkbox</code>, <code>switch</code>, <code>datepicker</code></td></tr>
+          <tr><td>Layout</td><td><code>row</code>, <code>column</code>, <code>grid</code>, <code>card</code>, <code>tabs</code></td></tr>
+          <tr><td>Display</td><td><code>text</code>, <code>title</code>, <code>statistic</code>, <code>alert</code></td></tr>
+          <tr><td>Data</td><td><code>table</code>, <code>list</code></td></tr>
+          <tr><td>Charts</td><td><code>lineChart</code>, <code>barChart</code>, <code>pieChart</code>, <code>areaChart</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>Example schemas (in repo)</h2>
+      <table>
+        <thead>
+          <tr><th>Example</th><th>Schema file</th><th>Local dev</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>User Management</td><td><code>sites/user-management/src/schemas/page.json</code></td><td><code>pnpm demo:user-management</code></td></tr>
+          <tr><td>CRM Dashboard</td><td><code>sites/crm-dashboard/src/schemas/page.json</code></td><td><code>pnpm demo:crm</code></td></tr>
+          <tr><td>Analytics Dashboard</td><td><code>sites/analytics-dashboard/src/schemas/page.json</code></td><td><code>pnpm demo:analytics</code></td></tr>
+          <tr><td>Form Builder</td><td><code>sites/form-builder/src/schemas/page.json</code></td><td><code>pnpm demo:form-builder</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <footer>MIT © shubhamsunnynitkkr</footer>
+</body>
+</html>

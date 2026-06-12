@@ -1,0 +1,78 @@
+{
+  "type": "page",
+  "title": "User Management",
+  "modals": [
+    {
+      "id": "createUser",
+      "title": "Create User",
+      "children": [
+        { "type": "input", "name": "name", "label": "Name", "required": true },
+        { "type": "input", "name": "email", "label": "Email", "required": true, "validation": [{ "rule": "email" }] },
+        {
+          "type": "select",
+          "name": "role",
+          "label": "Role",
+          "options": [
+            { "label": "Admin", "value": "admin" },
+            { "label": "User", "value": "user" }
+          ]
+        },
+        {
+          "type": "input",
+          "name": "department",
+          "label": "Department",
+          "visibleIf": { "field": "role", "equals": "admin" }
+        },
+        {
+          "type": "button",
+          "text": "Save",
+          "variant": "primary",
+          "actions": {
+            "onClick": { "type": "closeModal", "modalId": "createUser" }
+          }
+        }
+      ]
+    }
+  ],
+  "children": [
+    {
+      "type": "row",
+      "children": [
+        {
+          "type": "column",
+          "span": 16,
+          "children": [
+            { "type": "input", "name": "search", "label": "Search", "placeholder": "Search users..." }
+          ]
+        },
+        {
+          "type": "column",
+          "span": 8,
+          "children": [
+            {
+              "type": "button",
+              "text": "Add User",
+              "variant": "primary",
+              "actions": { "onClick": { "type": "openModal", "modalId": "createUser" } }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "dataSource": "{{users}}",
+      "rowKey": "id",
+      "columns": [
+        { "key": "name", "title": "Name", "sortable": true, "filterable": true },
+        { "key": "email", "title": "Email", "sortable": true },
+        { "key": "role", "title": "Role" }
+      ],
+      "pagination": { "pageSize": 5, "showSizeChanger": true },
+      "rowActions": [
+        { "type": "button", "text": "Edit", "variant": "link" },
+        { "type": "button", "text": "Delete", "variant": "link", "danger": true }
+      ]
+    }
+  ]
+}

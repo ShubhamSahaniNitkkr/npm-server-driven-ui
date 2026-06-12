@@ -1,0 +1,26 @@
+{
+  "name": "server-driven-ui-monorepo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo for @shubhamsunnynitkkr/server-driven-ui",
+  "scripts": {
+    "build": "pnpm --filter \"./packages/*\" run build",
+    "sites:build": "pnpm build && pnpm --filter \"./sites/*\" run build",
+    "demo:user-management": "pnpm build && pnpm --filter sdui-site-user-management dev",
+    "demo:crm": "pnpm build && pnpm --filter sdui-site-crm-dashboard dev",
+    "demo:analytics": "pnpm build && pnpm --filter sdui-site-analytics-dashboard dev",
+    "demo:form-builder": "pnpm build && pnpm --filter sdui-site-form-builder dev",
+    "docs:serve": "npx serve sites/docs -l 3000",
+    "test": "pnpm --filter \"./packages/*\" run test",
+    "test:coverage": "pnpm --filter @shubhamsunnynitkkr/server-driven-ui run test:coverage",
+    "lint": "pnpm --filter \"./packages/*\" run lint",
+    "typecheck": "pnpm --filter \"./packages/*\" run typecheck",
+    "prepublish:check": "pnpm build && pnpm test:coverage"
+  },
+  "keywords": ["server-driven-ui", "sdui", "react", "schema", "json-ui"],
+  "author": "shubhamsunnynitkkr",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
